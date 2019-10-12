@@ -4,6 +4,7 @@ import sys
 import os
 import urlparse
 import shutil
+import logging
 from subprocess import Popen
 from subprocess import PIPE
 
@@ -98,6 +99,8 @@ def install_pacakge(source, pkg_type):
     os.system(cmd) # TODO catch return
 
 def main():
+    logging.basicConfig(filename='/tmp/python.log',level=logging.INFO)
+    
     module = AnsibleModule(
         argument_spec = dict(
             enabled   = dict(required=True, choices=BOOLEANS) # TODO actually use this
@@ -106,6 +109,7 @@ def main():
 
     if not on_ec2():
         module.fail_json(msg="must install the AWS CodeDeploy on an EC2 instance")
+        logging.info('must install the AWS CodeDeploy on an EC2 instance')
 
     try:
         os = os_type()
@@ -116,11 +120,13 @@ def main():
             pkg_type = 'rpm'
         else:
             module.fail_json(msg="must install the AWS CodeDeploy on a supported OS type")
+            logging.info('must install the AWS CodeDeploy on a supported OS type')
 
         pkg = get_package(module, pkg_type)
         install_pacakge(pkg, pkg_type)
     except Exception, e:
         module.fail_json(msg=str(e))
+        logging.info(msg)
 
     module.exit_json(installed=True)
 
