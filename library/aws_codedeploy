@@ -128,6 +128,7 @@ def main():
         module.fail_json(msg=str(e))
         logging.info(str(e))
 
+    logging.info('Installation done')    
     module.exit_json(installed=True)
 
 from ansible.module_utils.basic import *
