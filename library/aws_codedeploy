@@ -110,10 +110,14 @@ def main():
             enabled   = dict(required=True, choices=BOOLEANS) # TODO actually use this
         )
     )
+    
+    logging.info("STARTING-2")
 
     if not on_ec2():
         module.fail_json(msg="must install the AWS CodeDeploy on an EC2 instance")
         logging.info('must install the AWS CodeDeploy on an EC2 instance')
+        
+    logging.info("STARTING-3")
 
     try:
         os = os_type()
