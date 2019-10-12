@@ -126,7 +126,7 @@ def main():
         install_pacakge(pkg, pkg_type)
     except Exception, e:
         module.fail_json(msg=str(e))
-        logging.info(msg)
+        logging.info(str(e))
 
     module.exit_json(installed=True)
 
