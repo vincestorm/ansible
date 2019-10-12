@@ -5,7 +5,6 @@ import os
 import urlparse
 import shutil
 import logging
-from ansible.module_utils.basic import *
 from subprocess import Popen
 from subprocess import PIPE
 
