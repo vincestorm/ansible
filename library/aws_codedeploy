@@ -105,10 +105,20 @@ def main():
     
     logging.info("STARTING")
     
+    '''
     module = AnsibleModule(
         argument_spec = dict(
             enabled   = dict(required=True, choices=BOOLEANS) # TODO actually use this
         )
+    )
+    '''
+    module = AnsibleModule(
+    argument_spec = dict(
+        state     = dict(default='present', choices=['present', 'absent']),
+        name      = dict(required=True),
+        enabled   = dict(required=True, choices=BOOLEANS),
+        something = dict(aliases=['whatever'])
+    )
     )
     
     logging.info("STARTING-2")
